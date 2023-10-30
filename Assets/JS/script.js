@@ -6,14 +6,14 @@ const quizQuestions = [
         answer: "<head></head>"
     },
     {
-        questionText: "Luke Skywalker is a character from which film series",
+        questionText: "Which of the below CSS properties is used to change the background color of CSS ?",
         answerOptions: [
-            "The Lion King",
-            "Harry Potter",
-            "Star Wars",
-            "Lord of the Rings"
+            "bg color",
+            "color-background",
+            "background-color",
+            "color"
         ],
-        answer: "Star Wars"
+        answer: "background-color"
     },
     {
         questionText: "How many days are in September",
@@ -26,9 +26,31 @@ let currentQuestion = 0; //computers start counting from zero remember!
 let currentScore = 0;
 
 // get our elements from the dom
+const startButton = document.querySelector(".startButton")
+console.log(startButton);
+
+
+startButton.addEventListener("click", myFunction);
+
+function myFunction() {
+    createQuizQuestion(quizQuestions[0]);
+    var count = 100;
+    var interval = setInterval(function () {
+        document.getElementById('demo').innerHTML = count;
+        count--;
+        if (count === 0) {
+            clearInterval(interval);
+            document.getElementById('demo').innerHTML = 'Done';
+            // or...
+            alert("You're out of time!");
+        }
+    }, 1000);
+}
+
+
 const quizContainer = document.querySelector(".quiz-container");
 const questionDisplay = document.querySelector(".question");
-console.log(quizContainer)
+// console.log(quizContainer)
 const answerList = document.querySelector(".answer-list");
 const score = document.querySelector(".quiz-score");
 
@@ -100,9 +122,11 @@ const createAnswerButtons = answerOptions => {
 
 const handleAnswerButtonClick = answerButton => { };
 
-(function () {
-    createQuizQuestion(quizQuestions[0]);
-})();
+
+
+// (function () {
+//     createQuizQuestion(quizQuestions[0]);
+// })();
 
 
 {/* <p id="demo"></p> */ }
