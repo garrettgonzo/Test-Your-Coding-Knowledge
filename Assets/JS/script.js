@@ -1,3 +1,14 @@
+const quizContainer = document.querySelector(".quiz-container");
+const questionDisplay = document.querySelector(".question");
+const answerList = document.querySelector(".answer-list");
+const score = document.querySelector(".quiz-score");
+const initials = document.querySelector(".initials");
+const input = document.querySelector(".input");
+const highscore = document.querySelector(".highscore");
+const submit = document.querySelector(".submit");
+const startButton = document.querySelector(".startButton")
+
+
 const quizQuestions = [
     {
         questionText: "What element is a container for all the head elements, and may include meta information, the document title, scripts and styles?",
@@ -34,10 +45,8 @@ const quizQuestions = [
 let currentQuestion = 0;
 let currentScore = 0;
 
-const startButton = document.querySelector(".startButton")
 console.log(startButton);
 
-startButton.addEventListener("click", myFunction);
 
 function myFunction() {
     createQuizQuestion(quizQuestions[0]);
@@ -53,14 +62,28 @@ function myFunction() {
     }, 1000);
 }
 
+// function getVal() {
+//     console.log("monkey");
+//     const val = document.querySelector('.input').value;
+//     console.log(val);
+// }
 
-const quizContainer = document.querySelector(".quiz-container");
-const questionDisplay = document.querySelector(".question");
-const answerList = document.querySelector(".answer-list");
-const score = document.querySelector(".quiz-score");
-const initials = document.querySelector(".initials");
-const input = document.querySelector(".input");
-console.log(input.value);
+
+// console.log(input.value);
+
+
+function handleSubmit() {
+    const userInitials = input.value;
+    console.log(userInitials);
+    var highscoreObject = {
+        initials: userInitials,
+        score: currentScore
+    }
+
+    var pastHighscores = JSON.parse(localStorage.getItem("highScores")) || []
+    pastHighscores.push(highscoreObject)
+    localStorage.setItem("highScores", JSON.stringify(pastHighscores))
+}
 
 const createQuizQuestion = quizQuestion => {
     createQuestionText(quizQuestion.questionText);
@@ -73,8 +96,9 @@ const createQuizScore = () => {
     score.style.display = "block";
     score.textContent =
         "You scored " + currentScore + " out of " + quizQuestions.length;
-    initials.textContent =
-        "Enter your initials"
+    // initials.textContent =
+    //     "Enter your initials"
+    initials.style.display = "block"
 
 };
 console.log(score.textContent);
@@ -119,6 +143,8 @@ const createAnswerButtons = answerOptions => {
 const handleAnswerButtonClick = answerButton => { };
 
 
+startButton.addEventListener("click", myFunction);
+submit.addEventListener("click", handleSubmit);
 
 // (function () {
 //     createQuizQuestion(quizQuestions[0]);
