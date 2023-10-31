@@ -28,7 +28,7 @@ WHEN I the generator is pushed out and live on the web
 
 ## Deployed URL 
 
-https://garrettgonzo.github.io/My-Coding-Portfolio/
+https://garrettgonzo.github.io/Test-Your-Coding-Knowledge/
 
 ## Website Screenshot
 
