@@ -82,14 +82,24 @@ function handleSubmit() {
     var pastHighscores = JSON.parse(localStorage.getItem("highScores")) || []
     pastHighscores.push(highscoreObject)
     localStorage.setItem("highScores", JSON.stringify(pastHighscores))
-    pastHighscores.pull(highscoreObject)
-    localStorage.setItem("highScores", JSON.stringify(pastHighscores))
+    displayHighScores(pastHighscores)
 }
 
 const quizQuestionCreator = quizQuestion => {
     createQuestionText(quizQuestion.questionText);
     createAnswerButtons(quizQuestion.answerMakers);
 };
+
+function displayHighScores(highScoresRecived) {
+    console.log(highScoresRecived);
+    for (i = 0; i < highScoresRecived.length; i++) {
+        console.log(highScoresRecived[i]);
+        var pastScore = highScoresRecived[i]
+        var newScoreElement = document.createElement("p");
+        newScoreElement.textContent = "Score: " + pastScore.score + "| Initials: " + pastScore.initials
+        highscore.append(newScoreElement)
+    }
+}
 
 const createQuizScore = () => {
     questionDisplay.style.display = "none";
